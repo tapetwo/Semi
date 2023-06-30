@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gdu.semi.mapper.AdminMapper">
+
+	<!-- 유저 -->
+	<resultMap type="AccessLogDTO" id="AccessLogMap">
+		<result column="ACCESS_LOG_NO" property="accessLogNo" />
+		<result column="ID" property="id" />
+		<result column="LAST_LOGIN_DATE" property="lastLoginDate" />
+	</resultMap>
+	<resultMap type="SleepUserDTO" id="SleepUserMap">
+		<result column="USER_NO" property="userNo" />
+		<result column="ID" property="id" />
+		<result column="PW" property="pw" />
+		<result column="NAME" property="name" />
+		<result column="GENDER" property="gender" />
+		<result column="EMAIL" property="email" />
+		<result column="MOBILE" property="mobile" />
+		<result column="BIRTHYEAR" property="birthyear" />
+		<result column="BIRTHDAY" property="birthday" />
+		<result column="POSTCODE" property="postcode" />
+		<result column="ROAD_ADDRESS" property="roadAddress" />
+		<result column="JIBUN_ADDRESS" property="jibunAddress" />
+		<result column="DETAIL_ADDRESS" property="detailAddress" />
+		<result column="EXTRA_ADDRESS" property="extraAddress" />
+		<result column="AGREE_CODE" property="agreeCode" />
+		<result column="SNS_TYPE" property="snsType" />
+		<result column="JOIN_DATE" property="joinDate" />
+		<result column="LAST_LOGIN_DATE" property="lastLoginDate" />
+		<result column="SLEEP_DATE" property="sleepDate" />
+		<result column="POINT" property="point" />
+	</resultMap>
+	<resultMap type="UserDTO" id="UserMap">
+		<result column="USER_NO" property="userNo" />
+		<result column="ID" property="id" />
+		<result column="PW" property="pw" />
+		<result column="NAME" property="name" />
+		<result column="GENDER" property="gender" />
+		<result column="EMAIL" property="email" />
+		<result column="MOBILE" property="mobile" />
+		<result column="BIRTHYEAR" property="birthyear" />
+		<result column="BIRTHDAY" property="birthday" />
+		<result column="POSTCODE" property="postcode" />
+		<result column="ROAD_ADDRESS" property="roadAddress" />
+		<result column="JIBUN_ADDRESS" property="jibunAddress" />
+		<result column="DETAIL_ADDRESS" property="detailAddress" />
+		<result column="EXTRA_ADDRESS" property="extraAddress" />
+		<result column="AGREE_CODE" property="agreeCode" />
+		<result column="SNS_TYPE" property="snsType" />
+		<result column="JOIN_DATE" property="joinDate" />
+		<result column="PW_MODIFY_DATE" property="pwModifyDate" />
+		<result column="INFO_MODIFY_DATE" property="infoModifyDate" />
+		<result column="SESSION_ID" property="sessionId" />
+		<result column="SESSION_LIMIT_DATE" property="sessionLimitDate" />
+		<result column="POINT" property="point" />
+		<collection resultMap="AccessLogMap" property="accessLogDTO"></collection>
+	</resultMap>
+	<resultMap type="AllUserDTO" id="AllUserMap">
+		<result column="RN" property="rn" />
+		<result column="USER_NO" property="userNo" />
+		<result column="ID" property="id" />
+		<result column="PW" property="pw" />
+		<result column="NAME" property="name" />
+		<result column="GENDER" property="gender" />
+		<result column="EMAIL" property="email" />
+		<result column="MOBILE" property="mobile" />
+		<result column="BIRTHYEAR" property="birthyear" />
+		<result column="BIRTHDAY" property="birthday" />
+		<result column="POSTCODE" property="postcode" />
+		<result column="ROAD_ADDRESS" property="roadAddress" />
+		<result column="JIBUN_ADDRESS" property="jibunAddress" />
+		<result column="DETAIL_ADDRESS" property="detailAddress" />
+		<result column="EXTRA_ADDRESS" property="extraAddress" />
+		<result column="AGREE_CODE" property="agreeCode" />
+		<result column="SNS_TYPE" property="snsType" />
+		<result column="JOIN_DATE" property="joinDate" />
+		<result column="PW_MODIFY_DATE" property="pwModifyDate" />
+		<result column="INFO_MODIFY_DATE" property="infoModifyDate" />
+		<result column="SESSION_ID" property="sessionId" />
+		<result column="SESSION_LIMIT_DATE" property="sessionLimitDate" />
+		<result column="POINT" property="point" />
+		<collection resultMap="UserMap" property="userDTO"></collection>
+		<collection resultMap="SleepUserMap" property="sleepUserDTO"></collection>
+	</resultMap>
+	
+	<!-- 게시판 -->
+	<resultMap type="AttachDTO" id="AttachMap">
+		<result column="ATTACH_NO" property="attachNo" />
+		<result column="PATH" property="path" />
+		<result column="ORIGIN" property="origin" />
+		<result column="FILESYSTEM" property="filesystem" />
+		<result column="DOWNLOAD_CNT" property="downloadCnt" />
+		<result column="UPLOAD_BOARD_NO" property="uploadBoardNo" />
+	</resultMap>
+	<resultMap type="UploadBoardDTO" id="UploadBoardMap">
+		<result column="UPLOAD_BOARD_NO" property="uploadBoardNo" />
+		<result column="ID" property="id" />
+		<result column="UPLOAD_TITLE" property="uploadTitle" />
+		<result column="UPLOAD_CONTENT" property="uploadContent" />
+		<result column="IP" property="ip" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="MODIFY_DATE" property="modifyDate" />
+		<result column="HIT" property="hit" />
+		<collection resultMap="AttachMap" property="attachDTO"></collection>
+	</resultMap>
+	<resultMap type="BoardDTO" id="BoardMap">
+		<result column="RN" property="rn" />
+		<result column="FREE_BOARD_NO" property="freeBoardNo" />
+		<result column="GALLERY_BOARD_NO" property="galleryBoardNo" />
+		<result column="UPLOAD_BOARD_NO" property="uploadBoardNo" />
+		<result column="ID" property="id" />
+		<result column="TITLE" property="title" />
+		<result column="CONTENT" property="content" />
+		<result column="IP" property="ip" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="MODIFY_DATE" property="modifyDate" />
+		<result column="STATE" property="state" />
+		<result column="DEPTH" property="depth" />
+		<result column="GROUP_NO" property="groupNo" />
+		<result column="GROUP_ORDER" property="groupOrder" />
+		<result column="HIT" property="hit" />
+	</resultMap>
+	
+	<!-- 전체조회 -->
+	<select id="selectAllUserList" parameterType="Map" resultMap="AllUserMap">
+		SELECT D.RN, D.USER_NO, D.ID, D.PW, D.NAME, D.GENDER, D.EMAIL, D.BIRTHYEAR, D.BIRTHDAY, D.SNS_TYPE, D.JOIN_DATE, D.INFO_MODIFY_DATE, D.LAST_LOGIN_DATE, D.SLEEP_DATE, D.POINT
+  		  FROM (SELECT ROW_NUMBER() OVER(ORDER BY JOIN_DATE DESC) AS RN, C.USER_NO, C.ID, C.PW, C.NAME, C.GENDER, C.EMAIL, C.BIRTHYEAR, C.BIRTHDAY, C.SNS_TYPE, C.JOIN_DATE, C.INFO_MODIFY_DATE, C.LAST_LOGIN_DATE, C.SLEEP_DATE, C.POINT
+          		  FROM (SELECT U.USER_NO, U.ID, U.PW, U.NAME, U.GENDER, U.EMAIL, U.BIRTHYEAR, U.BIRTHDAY, U.SNS_TYPE, U.JOIN_DATE, U.INFO_MODIFY_DATE, A.LAST_LOGIN_DATE, NULL SLEEP_DATE, U.POINT
+                  		  FROM USERS U LEFT OUTER JOIN ACCESS_LOG A
+                    		ON U.ID = A.ID
+                		UNION
+                		SELECT USER_NO, ID, PW, NAME, GENDER, EMAIL, BIRTHYEAR, BIRTHDAY, SNS_TYPE, JOIN_DATE, NULL INFO_MODIFY_DATE, LAST_LOGIN_DATE, SLEEP_DATE, POINT
+                  		  FROM SLEEP_USERS) C) D
+ 		 <where>
+ 		 	D.RN BETWEEN #{begin} AND #{end}
+		  <if test="column=='ID'">AND ${column} LIKE '%' || #{query} || '%'</if>
+		  <if test="column=='JOIN_DATE' or column=='SLEEP_DATE'">AND D.${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{stop}, 'yyyy-mm-dd')</if>
+		  <if test="column=='POINT'">AND ${column} BETWEEN #{first} AND #{last}</if>
+		</where>
+	</select>
+	
+	<select id="selectAllUserCountByQuery" parameterType="Map" resultType="int">
+		SELECT COUNT(*)
+ 		  FROM USERS U FULL OUTER JOIN SLEEP_USERS S
+    		ON U.ID = S.ID
+	</select>
+	
+	<!-- 활동유저 조회 -->
+	<select id="selectUsersByQuery" parameterType="Map" resultMap="AllUserMap">
+		SELECT C.RN, C.USER_NO, C.ID, C.PW, C.NAME, C.GENDER, C.EMAIL, C.BIRTHYEAR, C.BIRTHDAY, C.SNS_TYPE, C.JOIN_DATE, C.INFO_MODIFY_DATE, C.LAST_LOGIN_DATE, C.POINT
+		  FROM (SELECT ROWNUM AS RN, B.USER_NO, B.ID, B.PW, B.NAME, B.GENDER, B.EMAIL, B.BIRTHYEAR, B.BIRTHDAY, B.SNS_TYPE, B.JOIN_DATE, B.INFO_MODIFY_DATE, B.LAST_LOGIN_DATE, B.POINT
+        		  FROM (SELECT U.USER_NO, U.ID, U.PW, U.NAME, U.GENDER, U.EMAIL, U.BIRTHYEAR, U.BIRTHDAY, U.SNS_TYPE, U.JOIN_DATE, U.INFO_MODIFY_DATE, A.LAST_LOGIN_DATE, U.POINT
+                		  FROM USERS U LEFT OUTER JOIN ACCESS_LOG A
+                  		  	ON U.ID = A.ID
+               			 ORDER BY U.JOIN_DATE DESC) B) C
+		<where>
+		  C.RN BETWEEN #{begin} AND #{end}
+		  <if test="column=='ID'">AND C.${column} LIKE '%' || #{query} || '%'</if>
+		  <if test="column=='JOIN_DATE'">AND C.${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{stop}, 'yyyy-mm-dd')</if>
+		  <if test="column=='POINT'">AND C.${column} BETWEEN #{first} AND #{last}</if>
+		</where>
+	</select>
+	
+	<select id="selectUserCountByQuery" parameterType="Map" resultType="int">
+		SELECT COUNT(*)
+		  FROM USERS
+		<where>
+		  <if test="column=='ID'">${column} LIKE '%' || #{query} || '%'</if>
+		  <if test="column=='JOIN_DATE'">${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{stop}, 'yyyy-mm-dd')</if>
+		  <if test="column=='POINT'">${column} BETWEEN #{first} AND #{last}</if>
+		</where>
+	</select>
+	
+	<!-- 휴면유저 조회 -->
+	<select id="selectSleepUsersByQuery" parameterType="Map" resultMap="AllUserMap">
+		SELECT B.RN, B.USER_NO, B.ID, B.PW, B.NAME, B.GENDER, B.EMAIL, B.MOBILE, B.BIRTHYEAR, B.BIRTHDAY, B.POSTCODE, B.ROAD_ADDRESS, B.JIBUN_ADDRESS, B.DETAIL_ADDRESS, B.EXTRA_ADDRESS, B.AGREE_CODE, B.SNS_TYPE, B.JOIN_DATE, B.LAST_LOGIN_DATE, B.SLEEP_DATE, B.POINT
+  		  FROM (SELECT ROWNUM AS RN, A.USER_NO, A.ID, A.PW, A.NAME, A.GENDER, A.EMAIL, A.MOBILE, A.BIRTHYEAR, A.BIRTHDAY, A.POSTCODE, A.ROAD_ADDRESS, A.JIBUN_ADDRESS, A.DETAIL_ADDRESS, A.EXTRA_ADDRESS, A.AGREE_CODE, A.SNS_TYPE, A.JOIN_DATE, A.LAST_LOGIN_DATE, A.SLEEP_DATE, A.POINT
+          		  FROM (SELECT USER_NO, ID, PW, NAME, GENDER, EMAIL, MOBILE, BIRTHYEAR, BIRTHDAY, POSTCODE, ROAD_ADDRESS, JIBUN_ADDRESS, DETAIL_ADDRESS, EXTRA_ADDRESS, AGREE_CODE, SNS_TYPE, JOIN_DATE, LAST_LOGIN_DATE, SLEEP_DATE, POINT
+                  		  FROM SLEEP_USERS
+                 		 ORDER BY SLEEP_DATE DESC) A) B
+		<where>
+			B.RN BETWEEN #{begin} AND #{end}
+		  <if test="column=='ID'">AND B.${column} LIKE '%' || #{query} || '%'</if>
+		  <if test="column=='JOIN_DATE' or column=='SLEEP_DATE'">AND B.${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{stop}, 'yyyy-mm-dd')</if>
+		  <if test="column=='POINT'">AND B.${column} BETWEEN #{first} AND #{last}</if>
+		</where>
+		 ORDER BY SLEEP_DATE DESC
+	</select>
+	
+	<select id="selectSleepUserCountByQuery" parameterType="Map" resultType="int">
+		SELECT COUNT(*)
+		  FROM SLEEP_USERS
+		<where>
+		  <if test="column=='ID'">${column} LIKE '%' || #{query} || '%'</if>
+		  <if test="column=='JOIN_DATE' or column=='SLEEP_DATE'">${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{stop}, 'yyyy-mm-dd')</if>
+		  <if test="column=='POINT'">${column} BETWEEN #{first} AND #{last}</if>
+		</where>
+	</select>
+	
+	<!-- 유저 삭제 -->
+	<delete id="deleteUser" parameterType="String">
+		DELETE
+		  FROM USERS
+		 WHERE ID = #{id}
+	</delete>
+	
+	<delete id="deleteSleepUser" parameterType="String">
+		DELETE
+		  FROM SLEEP_USERS
+		 WHERE ID = #{id}
+	</delete>
+	
+	<insert id="insertRetireUser" parameterType="map">
+		INSERT INTO RETIRE_USERS (USER_NO, ID, JOIN_DATE, RETIRE_DATE)
+			(SELECT USER_NO, ID, JOIN_DATE, SYSDATE
+			   FROM ${userType}
+			  WHERE ID = #{id})
+	</insert>
+	
+	<!-- 휴면 관련 -->
+	<insert id="insertRestoreUser" parameterType="String">
+		INSERT INTO USERS(USER_NO, ID, PW, NAME, GENDER, EMAIL, MOBILE, BIRTHYEAR, BIRTHDAY, POSTCODE, ROAD_ADDRESS, JIBUN_ADDRESS, DETAIL_ADDRESS, EXTRA_ADDRESS, AGREE_CODE, SNS_TYPE, JOIN_DATE, INFO_MODIFY_DATE, POINT)
+         (SELECT USER_NO, ID, PW, NAME, GENDER, EMAIL, MOBILE, BIRTHYEAR, BIRTHDAY, POSTCODE, ROAD_ADDRESS, JIBUN_ADDRESS, DETAIL_ADDRESS, EXTRA_ADDRESS, AGREE_CODE, SNS_TYPE, JOIN_DATE, SYSDATE, POINT
+            FROM SLEEP_USERS
+           WHERE ID = #{id})
+	</insert>
+	
+	<insert id="insertAccessUser" parameterType="String">
+		INSERT INTO ACCESS_LOG(ACCESS_LOG_NO, ID, LAST_LOGIN_DATE)
+         (SELECT ACCESS_LOG_SEQ.NEXTVAL, ID, LAST_LOGIN_DATE
+            FROM SLEEP_USERS
+           WHERE ID = #{id})
+	</insert>
+	
+	<insert id="insertdormantUser" parameterType="String">
+		INSERT INTO SLEEP_USERS(USER_NO, ID, PW, NAME, GENDER, EMAIL, MOBILE, BIRTHYEAR, BIRTHDAY, POSTCODE, ROAD_ADDRESS, JIBUN_ADDRESS, DETAIL_ADDRESS, EXTRA_ADDRESS, AGREE_CODE, SNS_TYPE, JOIN_DATE, LAST_LOGIN_DATE, SLEEP_DATE, POINT)
+         (SELECT U.USER_NO, U.ID, U.PW, U.NAME, U.GENDER, U.EMAIL, U.MOBILE, U.BIRTHYEAR, U.BIRTHDAY, U.POSTCODE, U.ROAD_ADDRESS, U.JIBUN_ADDRESS, U.DETAIL_ADDRESS, U.EXTRA_ADDRESS, U.AGREE_CODE, U.SNS_TYPE, U.JOIN_DATE, A.LAST_LOGIN_DATE, SYSDATE, U.POINT
+            FROM USERS U LEFT OUTER JOIN ACCESS_LOG A
+              ON U.ID = A.ID
+           WHERE U.ID = #{id})
+	</insert>
+	
+	<!-- 전체 게시판 조회 -->
+	<select id="selectAllBoardByQuery" parameterType="map" resultMap="BoardMap">
+		SELECT B.RN, B.FREE_BOARD_NO, B.GALLERY_BOARD_NO, B.UPLOAD_BOARD_NO, B.ID, B.TITLE, B.CONTENT, B.IP, B.CREATE_DATE, B.MODIFY_DATE, B.STATE, B.DEPTH, B.GROUP_NO, B.GROUP_ORDER, B.HIT
+  		  FROM (SELECT ROW_NUMBER() OVER(ORDER BY GROUP_NO DESC, GROUP_ORDER ASC, CREATE_DATE DESC) AS RN, A.FREE_BOARD_NO, A.GALLERY_BOARD_NO, A.UPLOAD_BOARD_NO, A.ID, A.TITLE, A.CONTENT, A.IP, A.CREATE_DATE, A.MODIFY_DATE, A.STATE, A.DEPTH, A.GROUP_NO, A.GROUP_ORDER, A.HIT
+          		  FROM((SELECT FREE_BOARD_NO, 0 GALLERY_BOARD_NO, 0 UPLOAD_BOARD_NO, ID, FREE_TITLE AS TITLE, FREE_CONTENT AS CONTENT, IP, CREATE_DATE, NULL MODIFY_DATE, STATE, DEPTH, GROUP_NO, GROUP_ORDER, NULL HIT
+                  		  FROM FREE_BOARD
+      
+                		UNION
+    
+                		SELECT 0 FREE_BOARD_NO, GALLERY_BOARD_NO, 0 UPLOAD_BOARD_NO, ID, GALLERY_TITLE AS TITLE, GALLERY_CONTENT AS CONTENT, IP, CREATE_DATE, MODIFY_DATE, NULL STATE, NULL DEPTH, NULL GROUP_NO, NULL GROUP_ORDER, HIT
+                  		  FROM GALLERY_BOARD)
+      
+                		UNION
+    
+                		SELECT 0 FREE_BOARD_NO, 0 GALLERY_BOARD_NO, UPLOAD_BOARD_NO, ID, UPLOAD_TITLE AS TITLE, UPLOAD_CONTENT AS CONTENT, IP, CREATE_DATE, MODIFY_DATE, NULL STATE, NULL DEPTH, NULL GROUP_NO, NULL GROUP_ORDER, HIT
+                  		  FROM UPLOAD_BOARD) A
+		         <where>
+		         	<if test="type=='detail'">AND ID = #{id}</if>
+			 		<if test="column=='ID' or column=='TITLE' or column=='CONTENT'">AND ${column} LIKE '%' || #{query} || '%'</if>
+			 		<if test="column=='TITLE_CONTENT'">AND TITLE LIKE '%' || #{query} || '%' AND CONTENT LIKE '%' || #{query} || '%'</if>
+				  	<if test="column=='CREATE_DATE'">AND ${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{stop}, 'yyyy-mm-dd')</if>
+		         </where>
+		         ) B
+	 	WHERE B.RN BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="selectAllBoardCountByQuery" parameterType="Map" resultType="int">
+		SELECT COUNT(*)
+  		  FROM((SELECT ID, FREE_TITLE AS TITLE, FREE_CONTENT AS CONTENT, IP, CREATE_DATE, NULL MODIFY_DATE, STATE, DEPTH, GROUP_NO, GROUP_ORDER, NULL HIT
+          		  FROM FREE_BOARD
+      
+        		UNION
+    
+        		SELECT ID, GALLERY_TITLE AS TITLE, GALLERY_CONTENT AS CONTENT, IP, CREATE_DATE, MODIFY_DATE, NULL STATE, NULL DEPTH, NULL GROUP_NO, NULL GROUP_ORDER, HIT
+          		  FROM GALLERY_BOARD)
+      
+        		UNION
+    
+        		SELECT ID, UPLOAD_TITLE AS TITLE, UPLOAD_CONTENT AS CONTENT, IP, CREATE_DATE, MODIFY_DATE, NULL STATE, NULL DEPTH, NULL GROUP_NO, NULL GROUP_ORDER, HIT
+          		  FROM UPLOAD_BOARD) A
+		<where>
+			<if test="type=='detail'">AND ID = #{id}</if>
+			<if test="column=='ID' or column=='TITLE' or column=='CONTENT'">AND ${column} LIKE '%' || #{query} || '%'</if>
+			<if test="column=='TITLE_CONTENT'">AND TITLE LIKE '%' || #{query} || '%' AND CONTENT LIKE '%' || #{query} || '%'</if>
+	  		<if test="column=='CREATE_DATE'">AND ${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{stop}, 'yyyy-mm-dd')</if>
+        </where>
+	</select>
+	
+	<!-- 개별 게시판 검색 -->
+	<select id="selectGalleryUploadCountByQuery" parameterType="Map" resultType="int">
+		SELECT COUNT(*)
+  		  FROM ${board}
+		<where>
+			<if test="type=='detail'">AND ID = #{id}</if>
+			<if test="column=='ID' or column=='TITLE' or column=='CONTENT'">AND ${column} LIKE '%' || #{query} || '%'</if>
+			<if test="column=='TITLE_CONTENT'">AND TITLE LIKE '%' || #{query} || '%' AND CONTENT LIKE '%' || #{query} || '%'</if>
+	  		<if test="column=='CREATE_DATE'">AND ${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{stop}, 'yyyy-mm-dd')</if>
+        </where>
+	</select>
+	
+	<select id="selectFreeCountByQuery" parameterType="Map" resultType="int">
+		SELECT COUNT(*)
+  		  FROM FREE_BOARD
+		<where>
+			<if test="type=='detail'">AND ID = #{id}</if>
+			<if test="column=='ID' or column=='TITLE' or column=='CONTENT'">AND ${column} LIKE '%' || #{query} || '%'</if>
+			<if test="column=='TITLE_CONTENT'">AND TITLE LIKE '%' || #{query} || '%' AND CONTENT LIKE '%' || #{query} || '%'</if>
+	  		<if test="column=='CREATE_DATE'">AND ${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{stop}, 'yyyy-mm-dd')</if>
+        </where>
+	</select>
+	
+	<select id="selectFreeBoardByQuery" parameterType="Map" resultType="BoardDTO">
+		SELECT A.RN, A.ID, A.TITLE, A.CONTENT, A.IP, A.CREATE_DATE, A.STATE, A.DEPTH, A.GROUP_NO, A.GROUP_ORDER
+		  FROM (SELECT ROW_NUMBER() OVER(ORDER BY GROUP_NO DESC, GROUP_ORDER ASC) AS RN, ID, FREE_TITLE AS TITLE, FREE_CONTENT AS CONTENT, IP, CREATE_DATE, STATE, DEPTH, GROUP_NO, GROUP_ORDER
+          		  FROM FREE_BOARD
+	          	<where>
+					<if test="type=='detail'">AND ID = #{id}</if>
+					<if test="column=='ID' or column=='TITLE' or column=='CONTENT'">AND ${column} LIKE '%' || #{query} || '%'</if>
+					<if test="column=='TITLE_CONTENT'">AND TITLE LIKE '%' || #{query} || '%' AND CONTENT LIKE '%' || #{query} || '%'</if>
+			  		<if test="column=='CREATE_DATE'">AND ${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{stop}, 'yyyy-mm-dd')</if>
+	        	</where>
+          		  ) A
+       	 WHERE A.RN BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="selectGalleryBoardByQuery" parameterType="Map" resultType="BoardDTO">
+		SELECT A.RN, A.ID, A.TITLE, A.CONTENT, A.IP, A.CREATE_DATE, A.MODIFY_DATE, A.HIT
+		  FROM (SELECT ROW_NUMBER() OVER(ORDER BY GALLERY_BOARD_NO DESC) AS RN, ID, GALLERY_TITLE AS TITLE, GALLERY_CONTENT AS CONTENT, IP, CREATE_DATE, MODIFY_DATE, HIT
+          		  FROM GALLERY_BOARD
+		         <where>
+					<if test="type=='detail'">AND ID = #{id}</if>
+					<if test="column=='ID' or column=='TITLE' or column=='CONTENT'">AND ${column} LIKE '%' || #{query} || '%'</if>
+					<if test="column=='TITLE_CONTENT'">AND TITLE LIKE '%' || #{query} || '%' AND CONTENT LIKE '%' || #{query} || '%'</if>
+			  		<if test="column=='CREATE_DATE'">AND ${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{stop}, 'yyyy-mm-dd')</if>
+		        </where>
+          		  ) A
+         WHERE A.RN BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="selectUploadBoardByQuery" parameterType="Map" resultType="BoardDTO">
+		SELECT A.RN, A.ID, A.TITLE, A.CONTENT, A.IP, A.CREATE_DATE, A.MODIFY_DATE, A.HIT
+		  FROM (SELECT ROW_NUMBER() OVER(ORDER BY UPLOAD_BOARD_NO DESC) AS RN, ID, UPLOAD_TITLE AS TITLE, UPLOAD_CONTENT AS CONTENT, IP, CREATE_DATE, MODIFY_DATE, HIT
+          		  FROM UPLOAD_BOARD
+		         <where>
+					<if test="type=='detail'">AND ID = #{id}</if>
+					<if test="column=='ID' or column=='TITLE' or column=='CONTENT'">AND ${column} LIKE '%' || #{query} || '%'</if>
+					<if test="column=='TITLE_CONTENT'">AND TITLE LIKE '%' || #{query} || '%' AND CONTENT LIKE '%' || #{query} || '%'</if>
+			  		<if test="column=='CREATE_DATE'">AND ${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{stop}, 'yyyy-mm-dd')</if>
+		        </where>
+          		  ) A
+        WHERE A.RN BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="deleteFreeBoard" parameterType="map">
+		DELETE
+		  FROM FREE_BOARD
+		<where>
+			AND FREE_BOARD_NO = #{boardNo}
+	  		<if test="id != 'null'">AND ID = #{id}</if>
+	  </where>
+	</delete>
+	
+	<delete id="deleteGalleryBoard" parameterType="map">
+		DELETE
+		  FROM GALLERY_BOARD
+	   <where>
+			AND GALLERY_BOARD_NO = #{boardNo}
+	  		<if test="id != 'null'">AND ID = #{id}</if>
+	  </where>
+	</delete>
+	
+	<delete id="deleteUploadBoard" parameterType="map">
+		DELETE
+		  FROM UPLOAD_BOARD
+		<where>
+			AND UPLOAD_BOARD_NO = #{boardNo}
+		  	<if test="id != 'null'">AND ID = #{id}</if>
+		</where>
+	</delete>
+	
+	
+	
+</mapper>

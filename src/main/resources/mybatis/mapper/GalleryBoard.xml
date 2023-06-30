@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gdu.semi.mapper.GalleryBoardMapper">
+
+	
+	<select id="selectGalleryBoardListCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM GALLERY_BOARD	
+	</select>
+	
+	<select id="selectGalleryBoardListByMap" parameterType="Map" resultType="galleryBoardDTO">
+		SELECT A.ROW_NUM, A.GAllERY_BOARD_NO, A.ID, A.GALLERY_TITLE, A.GALLERY_CONTENT, A.IP, A.CREATE_DATE, A.MODIFY_DATE, A.HIT
+		  FROM (SELECT ROW_NUMBER() OVER(ORDER BY GALLERY_BOARD_NO DESC) AS ROW_NUM, GAllERY_BOARD_NO, ID, GALLERY_TITLE, GALLERY_CONTENT, IP, CREATE_DATE, MODIFY_DATE, HIT
+				  FROM GALLERY_BOARD) A
+		 WHERE A.ROW_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	 
+	<!-- 서머노트이미지 넣기--> 
+	<insert id="insertSummernoteImage" parameterType="SummernoteImageDTO">
+		INSERT INTO SUMMERNOTE_IMAGE
+	  		  (GALLERY_BOARD_NO, FILESYSTEM)
+	  	VALUES
+	  		  (#{galleryBoardNo}, #{filesystem})
+	</insert>
+	
+	
+	<!-- 게시글 삽입 -->
+	<insert id="insertGalleryBoard" parameterType="GalleryBoardDTO">
+		<selectKey keyProperty="galleryBoardNo" resultType="int" order="BEFORE">
+				SELECT GALLERY_BOARD_SEQ.NEXTVAL
+				  FROM DUAL
+		</selectKey>
+		INSERT INTO GALLERY_BOARD
+			 (GALLERY_BOARD_NO, ID, GALLERY_TITLE, GALLERY_CONTENT, IP, CREATE_DATE, MODIFY_DATE, HIT)
+		VALUES
+		     (#{galleryBoardNo}, #{id}, #{galleryTitle}, #{galleryContent}, #{ip}, SYSDATE, SYSDATE, 0) 
+		
+	</insert>
+	
+	<!--게시글 작성시 포인트 적립  -->
+	<update id="updateIncreasePoint" parameterType="String">
+		UPDATE USERS
+			SET POINT = POINT + 10
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 조회수 올리기 -->
+	<update id="updateHit" parameterType="int">
+		UPDATE GALLERY_BOARD
+		   SET HIT= HIT + 1
+		 WHERE GALLERY_BOARD_NO = #{galleryBoardNo}
+	</update>
+	
+	
+	
+	<!-- 게시글 정보를 보기 위함(상세정보) -->
+	<select id="selectGalleryBoardByNo" parameterType="int" resultType="galleryBoardDTO">
+		SELECT GALLERY_BOARD_NO, ID, GALLERY_TITLE, GALLERY_CONTENT, IP, CREATE_DATE, MODIFY_DATE, HIT
+		  FROM GALLERY_BOARD
+		 WHERE GALLERY_BOARD_NO = #{galleryBoardNo}
+	</select>
+	
+	
+	<!-- 게시글 업데이트를 위함 -->
+	<update id="updateGalleryBoard" parameterType="galleryBoardDTO">
+		UPDATE GALLERY_BOARD
+		   SET GALLERY_TITLE = #{galleryTitle}
+		   	 , GALLERY_CONTENT = #{galleryContent}
+		   	 , MODIFY_DATE=SYSDATE
+		 WHERE GALLERY_BOARD_NO = #{galleryBoardNo}	 
+	</update>
+
+	
+	<!-- 게시글 삭제를 위함 -->
+	<delete id="deleteGalleryBoard" parameterType="int">
+		DELETE
+		  FROM GALLERY_BOARD
+		 WHERE GALLERY_BOARD_NO = #{galleryBoardNo}	
+	</delete>
+	
+
+	<select id="selectSummernoteImageListIngalleryBoard" parameterType="int" resultType="SummernoteImageDTO">
+		SELECT GALLERY_BOARD_NO, FILESYSTEM
+		  FROM SUMMERNOTE_IMAGE
+		 WHERE GALLERY_BOARD_NO = #{galleryBoardNo}	
+	</select>
+	
+	
+	<select id="selectAllSummernoteImageList" resultType="SummernoteImageDTO">
+		SELECT GALLERY_BOARD_NO, FILESYSTEM
+		  FROM SUMMERNOTE_IMAGE
+	</select>
+
+</mapper>
