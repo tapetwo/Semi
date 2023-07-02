@@ -75,6 +75,5 @@ public class DBConfig {
 	public TransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
 	}
-	
-	
+
 }
